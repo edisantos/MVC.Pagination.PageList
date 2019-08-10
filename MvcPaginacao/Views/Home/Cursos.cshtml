@@ -1,0 +1,64 @@
+﻿@using PagedList.Mvc
+@model  PagedList.IPagedList<MvcPaginacao.Models.Cursos>
+<link href="~/Content/PagedList.css" rel="stylesheet" />
+@{
+    ViewBag.Title = "Cursos";
+}
+
+<h2>Paginação com PageList</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayName("CursoId")
+        </th>
+        <th>
+            @Html.DisplayName("DataRegistro")
+        </th>
+        <th>
+            @Html.DisplayName("Curso")
+        </th>
+        <th>
+            @Html.DisplayName("Valor")
+        </th>
+        <th>
+            @Html.DisplayName("AutorId")
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CursoId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataRegistro)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Curso)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Valor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AutorId)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+@*Pagina @Model.PageNumber de @Model.PageCount
+    @Model.PageListPager*@
+Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber)
+            of @Model.PageCount   @Html.PagedListPager(Model, page => Url.Action("Cursos", new { page }))  
